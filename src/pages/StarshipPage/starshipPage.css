@@ -1,0 +1,12 @@
+.starship-info {
+    background-color: rgb(17, 97, 97);
+    width: 800px;
+    height: 400px;
+    display: flex;
+    padding: 0 40px;
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content:center;
+    align-items: flex-start;
+    font-size: 1.5rem;
+}
