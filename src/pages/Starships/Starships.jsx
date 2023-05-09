@@ -18,26 +18,33 @@ const Starships = () => {
         starship.pilots.map(async (url) => {
           const pilot = await getPilots(url);
           starship.people = [...starship.people, pilot];
+          setStarshipList(data);
         });
       });
-      console.log("data", data);
       setStarshipList(data);
     };
     fetchStarships();
-    // console.log(starshipList)
   }, []);
 
+  // useEffect(() => {
+  //   starshipList.forEach((e) => {
+  //     console.log("---", starshipList.people);
+  //   });
+  // }, [starshipList]);
+
   if (!starshipList.length) return <h1>Loading Starships ...</h1>;
- 
+
   return (
     <div className="starship-card-container">
       {starshipList.map((starship, idx) => (
         <div className="starship-card" key={idx}>
-          <Link to={starship.url.slice(21)}>{starship.name}</Link>
+          <Link to={starship.url.slice(21)}><h3>{starship.name}</h3>  </Link>
           {starship.people.length ? (
             <div>
               {starship.people.map((person, idx) => (
-                <h5 key={idx}>{person}</h5>
+                <h5 className="pilot" key={idx}>
+                  {person}
+                </h5>
               ))}{" "}
             </div>
           ) : (
@@ -45,7 +52,6 @@ const Starships = () => {
           )}
         </div>
       ))}
-      {/* <div>{starship.name}</div> */}
     </div>
   );
 };
