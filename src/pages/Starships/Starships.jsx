@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import "./starchips.css";
 
 // services
-import { getAllStarships } from "../../services/sw-api";
-
+import { getAllStarships, getPilots } from "../../services/sw-api";
 
 const Starships = () => {
   const [starshipList, setStarshipList] = useState([]);
@@ -14,25 +13,36 @@ const Starships = () => {
   useEffect(() => {
     const fetchStarships = async () => {
       const data = await getAllStarships();
-      // console.log(data);
+      data.map((starship) => {
+        starship.people = [];
+        starship.pilots.map(async (url) => {
+          const pilot = await getPilots(url);
+          starship.people = [...starship.people, pilot];
+        });
+      });
+      console.log("data", data);
       setStarshipList(data);
     };
     fetchStarships();
     // console.log(starshipList)
-    // console.log(getAllStarships())
   }, []);
 
   if (!starshipList.length) return <h1>Loading Starships ...</h1>;
-
+ 
   return (
     <div className="starship-card-container">
       {starshipList.map((starship, idx) => (
         <div className="starship-card" key={idx}>
-          <Link to={starship.url.slice(21)}>
+          <Link to={starship.url.slice(21)}>{starship.name}</Link>
+          {starship.people.length ? (
             <div>
-              {starship.name}
+              {starship.people.map((person, idx) => (
+                <h5 key={idx}>{person}</h5>
+              ))}{" "}
             </div>
-          </Link>
+          ) : (
+            <h5>No Pilot</h5>
+          )}
         </div>
       ))}
       {/* <div>{starship.name}</div> */}

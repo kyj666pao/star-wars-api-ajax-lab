@@ -24,3 +24,10 @@ export async function getStarship(starshipId) {
     return parsedData
 }
 // getStarship(2)
+
+export async function getPilots(url) {
+    const res = await fetch(url)
+    let parsedData = await res.json()
+    // console.log(typeof parsedData.name)
+    return parsedData.name
+}
