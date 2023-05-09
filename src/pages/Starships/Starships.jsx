@@ -21,7 +21,7 @@ const Starships = () => {
           setStarshipList(data);
         });
       });
-      setStarshipList(data);
+      // setStarshipList(data);
     };
     fetchStarships();
   }, []);
