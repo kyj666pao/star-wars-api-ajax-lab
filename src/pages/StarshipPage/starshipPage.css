@@ -10,3 +10,14 @@
     align-items: flex-start;
     font-size: 1.5rem;
 }
+
+.pilot-list {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.pilot-name {
+    line-height: 5px;
+    margin: 8px 24px;
+}
